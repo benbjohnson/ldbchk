@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/jmhodges/levigo"
+	"runtime"
 	"os"
 )
 
@@ -37,6 +38,9 @@ func main() {
 		warn("usage: ldbchk PATH")
 		os.Exit(1)
 	}
+
+	// Enable multicore.
+	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	// Generate database if missing.
 	path := flag.Arg(0)
